@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros</title>
+</head>
+<body>
+    <h1>Livros</h1>
+    <a href="/livro/cadastrar">Cadastrar Livro</a>
+    <hr>
+    <ul>
+        {{#each livro}}
+        <li>
+            <a href="/livro/{{this.id}}"><strong>{{this.titulo}}</strong> - {{this.anoPublicacao}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</body>
+</html>

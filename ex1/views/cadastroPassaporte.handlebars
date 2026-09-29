@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Passaporte</title>
+</head>
+<body>
+    <h1>Cadastrar Passaporte</h1>
+    <form action="/pessoas/{{pessoa.id}}/passaporte/cadastrar" method="post">
+        <div>
+            <label for="inumero">Número de Passaporte:</label>
+            <input type="text" name="numero" id="inumero">
+        </div>
+        <br>
+        <div>
+            <label for="ivalidade">Validade:</label>
+            <input type="date" name="validade" id="ivalidade">
+        </div>
+        <br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

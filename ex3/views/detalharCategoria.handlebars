@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhar Categoria</title>
+</head>
+<body>
+    <h1>{{categoria.nome}}</h1>
+    <label for="ilivro">Livros:</label>
+    <ul>
+        {{#each categoria.livros}}
+            <li><a href="/livro/{{this.id}}">{{this.titulo}} - {{this.anoPublicacao}}</a></li>
+        {{/each}}
+    </ul>
+</body>
+</html>

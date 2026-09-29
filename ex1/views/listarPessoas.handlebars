@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Pessoas</title>
+</head>
+<body>
+    <h1>Listar Pessoas</h1>
+    <a href="/pessoas/cadastrar">Cadastrar Pessoa</a>
+    <hr>
+
+    {{#each pessoas}}
+    <div>
+        <h1>{{nome}}</h1>
+        {{#if passaporte}}
+            <p>Número do Passaporte: {{passaporte.numero}}</p>
+            <p>Validade: {{passaporte.validade}}</p>
+        {{else}}
+            <p>Nenhum passaporte cadastrado.</p>
+            <p><a href="/pessoas/{{id}}/passaporte/cadastrar">Cadastrar Passaporte</a></p>
+        {{/if}}
+    </div>
+    {{/each}}
+    
+</body>
+</html>
