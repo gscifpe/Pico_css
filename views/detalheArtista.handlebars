@@ -1,0 +1,11 @@
+<h1>Detalhes do Artista</h1>
+
+<h2>{{artista.nome}}</h2>
+
+<p>Personagem: {{artista.personagem}}</p>
+
+{{#if artista.filme}}
+<p>Filme: {{artista.filme.titulo}}</p>
+{{/if}}
+
+<a href="/artistas">Voltar</a>

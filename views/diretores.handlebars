@@ -1,0 +1,14 @@
+<h1>Diretores</h1>
+
+<a href="/diretores/cadastrar">Cadastrar Diretor</a>
+
+<ul>
+    {{#each diretores}}
+        <li>
+            {{nome}}
+            <a href="/diretores/{{id}}">Detalhar</a>
+        </li>
+    {{/each}}
+</ul>
+
+<a href="/">Voltar</a>

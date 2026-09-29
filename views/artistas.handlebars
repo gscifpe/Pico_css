@@ -1,0 +1,17 @@
+<h1>Artistas</h1>
+
+<a href="/artistas/cadastrar">Cadastrar Artista</a>
+
+<ul>
+    {{#each artistas}}
+        <li>
+            {{nome}} - {{personagem}}
+            {{#if filme}}
+                - Filme: {{filme.titulo}}
+            {{/if}}
+            <a href="/artistas/{{id}}">Detalhar</a>
+        </li>
+    {{/each}}
+</ul>
+
+<a href="/">Voltar</a>

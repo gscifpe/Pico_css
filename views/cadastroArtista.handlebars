@@ -1,0 +1,20 @@
+<h1>Cadastrar Artista</h1>
+
+<form action="/artistas/cadastrar" method="POST">
+    <label>Nome:</label>
+    <input type="text" name="nome">
+
+    <label>Personagem:</label>
+    <input type="text" name="personagem">
+
+    <label>Filme:</label>
+    <select name="filmeId">
+        {{#each filmes}}
+            <option value="{{id}}">{{titulo}}</option>
+        {{/each}}
+    </select>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+<a href="/artistas">Voltar</a>

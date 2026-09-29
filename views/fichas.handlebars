@@ -1,0 +1,17 @@
+<h1>Fichas Técnicas</h1>
+
+<a href="/fichas/cadastrar">Cadastrar Ficha Técnica</a>
+
+<ul>
+    {{#each fichas}}
+        <li>
+            {{genero}} - {{duracao}} minutos
+            {{#if filme}}
+                - Filme: {{filme.titulo}}
+            {{/if}}
+            <a href="/fichas/{{id}}">Detalhar</a>
+        </li>
+    {{/each}}
+</ul>
+
+<a href="/">Voltar</a>

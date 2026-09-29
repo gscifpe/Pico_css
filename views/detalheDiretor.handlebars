@@ -1,0 +1,13 @@
+<h1>Detalhes do Diretor</h1>
+
+<h2>{{diretor.nome}}</h2>
+
+<h3>Filmes</h3>
+
+<ul>
+    {{#each diretor.filmes}}
+        <li>{{titulo}} - {{ano}}</li>
+    {{/each}}
+</ul>
+
+<a href="/diretores">Voltar</a>

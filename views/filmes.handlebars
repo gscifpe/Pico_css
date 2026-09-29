@@ -1,0 +1,17 @@
+<h1>Filmes</h1>
+
+<a href="/filmes/cadastrar">Cadastrar Filme</a>
+
+<ul>
+    {{#each filmes}}
+        <li>
+            {{titulo}} - {{ano}}
+            {{#if diretor}}
+                - Diretor: {{diretor.nome}}
+            {{/if}}
+            <a href="/filmes/{{id}}">Detalhar</a>
+        </li>
+    {{/each}}
+</ul>
+
+<a href="/">Voltar</a>

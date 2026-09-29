@@ -1,0 +1,23 @@
+<h1>Cadastrar Ficha Técnica</h1>
+
+<form action="/fichas/cadastrar" method="POST">
+    <label>Duração em minutos:</label>
+    <input type="number" name="duracao">
+
+    <label>Gênero:</label>
+    <input type="text" name="genero">
+
+    <label>Classificação:</label>
+    <input type="text" name="classificacao">
+
+    <label>Filme:</label>
+    <select name="filmeId">
+        {{#each filmes}}
+            <option value="{{id}}">{{titulo}}</option>
+        {{/each}}
+    </select>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+<a href="/fichas">Voltar</a>

@@ -1,0 +1,11 @@
+<h1>Detalhes da Ficha Técnica</h1>
+
+<p>Duração: {{ficha.duracao}} minutos</p>
+<p>Gênero: {{ficha.genero}}</p>
+<p>Classificação: {{ficha.classificacao}}</p>
+
+{{#if ficha.filme}}
+<p>Filme: {{ficha.filme.titulo}}</p>
+{{/if}}
+
+<a href="/fichas">Voltar</a>

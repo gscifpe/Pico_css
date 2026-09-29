@@ -1,0 +1,28 @@
+<h1>Detalhes do Filme</h1>
+
+<h2>{{filme.titulo}}</h2>
+
+<p>Ano: {{filme.ano}}</p>
+
+{{#if filme.diretor}}
+<p>Diretor: {{filme.diretor.nome}}</p>
+{{/if}}
+
+<h3>Artistas</h3>
+<ul>
+    {{#each filme.artistas}}
+        <li>{{nome}} - {{personagem}}</li>
+    {{/each}}
+</ul>
+
+<h3>Ficha Técnica</h3>
+
+{{#if filme.fichaTecnica}}
+<p>Duração: {{filme.fichaTecnica.duracao}} minutos</p>
+<p>Gênero: {{filme.fichaTecnica.genero}}</p>
+<p>Classificação: {{filme.fichaTecnica.classificacao}}</p>
+{{else}}
+<p>Este filme ainda não possui ficha técnica.</p>
+{{/if}}
+
+<a href="/filmes">Voltar</a>
