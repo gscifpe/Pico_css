@@ -1,18 +1,20 @@
-const sequelize = require('../config/bd')
-const Autor = require('./Autor.model')
+const sequelize = require('sequelize')
 const Livro = require('./Livro.model')
+const Categoria = require('./Categoria.model')
 
-Autor.hasMany(Livro, {
-    foreignKey: 'autorId',
+Livro.belongsToMany(Categoria, {
+    through: 'LivroCategoria',
+    foreignKey: 'livroId',
+    as: 'categorias'
+})
+
+Categoria.belongsToMany(Livro, {
+    through: 'LivroCategoria',
+    foreignKey: 'categoriaId',
     as: 'livros'
 })
 
-Livro.belongsTo(Autor, {
-    foreignKey: 'autorId',
-    as: 'autor'
-})
-
 module.exports = {
-    Autor,
-    Livro
+    Livro,
+    Categoria
 }

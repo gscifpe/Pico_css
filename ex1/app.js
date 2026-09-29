@@ -1,55 +1,75 @@
 const express = require('express')
-const exphbs = require('express-handlebars')
 const app = express()
+const exphbs = require('express-handlebars')
 
 app.engine('handlebars', exphbs.engine({defaultLayout: false}) )
 app.set('view engine', 'handlebars')
 
 const sequelize = require('./config/bd')
-const { Pessoa, Passaporte } = require('./models/index.js')
+const { Autor, Livro } = require('./models/index.js')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 
-app.get('/pessoas', async (req,res) => {
-  const pessoas = await Pessoa.findAll({
-        include: [{ model: Passaporte, as: 'passaporte'}]
-    })
-  res.render('listarPessoas', {
-    pessoas: pessoas.map(pessoa => pessoa.toJSON())
-  })
+app.get('/autor', async (req, res) => {
+  const autor = await Autor.findAll({ raw: true })
+    res.render('autor', { autor })
 })
 
-app.get('/pessoas/cadastrar', (req,res) => {
-    res.render('cadastroPessoa')
+app.get('/livro', async (req, res) => {
+    const livro = await Livro.findAll({ raw: true })
+    res.render('livro', { livro})
 })
 
-app.post('/pessoas/cadastrar', async (req, res) => {
+app.get('/autor/cadastrar', (req,res) => {
+    res.render('cadastrarAutor')
+})
+
+app.post('/autor/cadastrar', async (req,res) => {
     const nome = req.body.nome
-    await Pessoa.create({nome: nome})
-    res.redirect('/pessoas')
+    await Autor.create({nome:nome})
+    res.redirect('/autor')
 })
 
-app.get('/pessoas/:id/passaporte/cadastrar', async (req, res) => {
-    const id = req.params.id
-    const pessoa = await Pessoa.findByPk(id, {raw:true})
-    res.render('cadastroPassaporte', { pessoa })
+app.get('/livro/cadastrar', async (req,res) => {
+    const autor = await Autor.findAll({raw:true})
+    res.render('cadastrarLivro', { autor })
 })
 
-app.post('/pessoas/:id/passaporte/cadastrar', async (req, res) => {
-    const id = req.params.id
-    const numero = req.body.numero
-    const validade = req.body.validade
-    
-    const pessoa = await Pessoa.findByPk(id)
+app.post('/livro/cadastrar', async (req,res) => {
+    const titulo = req.body.titulo
+    const anoPublicacao = req.body.anoPublicacao
+    const autorId = req.body.autorId
 
-    await pessoa.createPassaporte({
-        numero: numero,
-        validade: validade
+    await Livro.create({
+        titulo: titulo,
+        anoPublicacao: anoPublicacao,
+        autorId: autorId
     })
 
-    res.redirect('/pessoas')
+    res.redirect('/livro')
 })
+
+app.get('/livro/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const livro = await Livro.findByPk(id, {
+    include: [{ model: Autor, as: 'autor' }]
+  });
+
+  res.render('detalharLivro', { livro: livro.toJSON() });
+});
+
+app.get('/autor/:id', async (req, res) => {
+  const id = req.params.id;
+
+  const autor = await Autor.findByPk(id, {
+    include: [{ model: Livro, as: 'livros' }]
+  });
+
+  res.render('detalharAutor', { autor: autor.toJSON() });
+});
+
 
 async function conectarBD() {
   try {

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/gscifpe/web_atividade#readme",
   "dependencies": {
+    "@picocss/pico": "^2.1.1",
     "express": "^5.2.1",
     "express-handlebars": "^9.0.1",
     "sequelize": "^6.37.8",

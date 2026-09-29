@@ -1,17 +1,18 @@
-const Pessoa = require('./Pessoa.model')
-const Passaporte = require('./Passaporte.model')
+const sequelize = require('../config/bd')
+const Autor = require('./Autor.model')
+const Livro = require('./Livro.model')
 
-Pessoa.hasOne(Passaporte, {
-    foreignKey: 'pessoaId',
-    as: 'passaporte'
+Autor.hasMany(Livro, {
+    foreignKey: 'autorId',
+    as: 'livros'
 })
 
-Passaporte.belongsTo(Pessoa,{
-    foreignKey: 'pessoaId',
-    as: 'pessoa'
+Livro.belongsTo(Autor, {
+    foreignKey: 'autorId',
+    as: 'autor'
 })
 
 module.exports = {
-    Pessoa,
-    Passaporte
+    Autor,
+    Livro
 }
