@@ -1,11 +1,51 @@
-<h1>Detalhes do Artista</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Artista</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<h2>{{artista.nome}}</h2>
+    <main class="container">
+        <h1>Detalhes do Artista</h1>
 
-<p>Personagem: {{artista.personagem}}</p>
+        <article>
+            <header><h2>{{artista.nome}}</h2></header>
 
-{{#if artista.filme}}
-<p>Filme: {{artista.filme.titulo}}</p>
-{{/if}}
+            <p>Personagem: {{artista.personagem}}</p>
 
-<a href="/artistas">Voltar</a>
+            {{#if artista.filme}}
+                <p>Filme: {{artista.filme.titulo}}</p>
+            {{/if}}
+
+            <footer>
+                <a href="/artistas" role="button" class="secondary" data-tooltip="Voltar para a lista de artistas">Voltar</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>

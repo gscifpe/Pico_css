@@ -1,23 +1,65 @@
-<h1>Cadastrar Ficha Técnica</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastrar Ficha Técnica</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<form action="/fichas/cadastrar" method="POST">
-    <label>Duração em minutos:</label>
-    <input type="number" name="duracao">
+    <main class="container">
+        <h1>Cadastrar Ficha Técnica</h1>
 
-    <label>Gênero:</label>
-    <input type="text" name="genero">
+        <article>
+            <form action="/fichas/cadastrar" method="POST">
+                <label>Duração em minutos:
+                    <input type="number" name="duracao">
+                </label>
 
-    <label>Classificação:</label>
-    <input type="text" name="classificacao">
+                <label>Gênero:
+                    <input type="text" name="genero">
+                </label>
 
-    <label>Filme:</label>
-    <select name="filmeId">
-        {{#each filmes}}
-            <option value="{{id}}">{{titulo}}</option>
-        {{/each}}
-    </select>
+                <label>Classificação:
+                    <input type="text" name="classificacao">
+                </label>
 
-    <button type="submit">Cadastrar</button>
-</form>
+                <label>Filme:
+                    <select name="filmeId">
+                        {{#each filmes}}
+                            <option value="{{id}}">{{titulo}}</option>
+                        {{/each}}
+                    </select>
+                </label>
 
-<a href="/fichas">Voltar</a>
+                <button type="submit" data-tooltip="Salvar a ficha técnica">Cadastrar</button>
+            </form>
+        </article>
+
+        <a href="/fichas" data-tooltip="Voltar para a lista de fichas">Voltar</a>
+    </main>
+</body>
+</html>

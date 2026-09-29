@@ -1,0 +1,31 @@
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.cards article {
+    margin: 0;
+}
+
+.topo-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.topo-lista a[role="button"] {
+    margin-bottom: 0;
+}
+
+details.dropdown {
+    margin-bottom: 0;
+}
+
+.vazio {
+    text-align: center;
+    color: var(--pico-muted-color);
+}

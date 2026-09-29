@@ -17,21 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send(`
-        <h1>Projeto Filmes</h1>
-        <h2>Filmes</h2>
-        <a href="/filmes">Listar Filmes</a><br>
-        <a href="/filmes/cadastrar">Cadastrar Filme</a>
-        <h2>Artistas</h2>
-        <a href="/artistas">Listar Artistas</a><br>
-        <a href="/artistas/cadastrar">Cadastrar Artista</a>
-        <h2>Diretores</h2>
-        <a href="/diretores">Listar Diretores</a><br>
-        <a href="/diretores/cadastrar">Cadastrar Diretor</a>
-        <h2>Fichas Técnicas</h2>
-        <a href="/fichas">Listar Fichas</a><br>
-        <a href="/fichas/cadastrar">Cadastrar Ficha</a>
-    `);
+    res.render('home');
 });
 
 /* FILMES */

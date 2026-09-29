@@ -1,17 +1,90 @@
-<h1>Artistas</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Artistas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<a href="/artistas/cadastrar">Cadastrar Artista</a>
+    <main class="container">
+        <div class="topo-lista">
+            <h1>Artistas</h1>
+            <a href="/artistas/cadastrar" role="button" data-tooltip="Adicionar um novo artista" data-placement="left">Cadastrar Artista</a>
+        </div>
 
-<ul>
-    {{#each artistas}}
-        <li>
-            {{nome}} - {{personagem}}
-            {{#if filme}}
-                - Filme: {{filme.titulo}}
-            {{/if}}
-            <a href="/artistas/{{id}}">Detalhar</a>
-        </li>
-    {{/each}}
-</ul>
+        <div class="cards">
+            {{#each artistas}}
+                <article>
+                    <header><strong>{{nome}}</strong></header>
+                    <p>Personagem: {{personagem}}</p>
+                    {{#if filme}}
+                        <p>Filme: {{filme.titulo}}</p>
+                    {{/if}}
+                    <footer>
+                        <details class="dropdown">
+                            <summary role="button" class="outline">Ações</summary>
+                            <ul>
+                                <li><a href="/artistas/{{id}}">Detalhar</a></li>
+                                <li><a href="#" onclick="abrirModal('modal-artista-{{id}}'); return false;">Visualização rápida</a></li>
+                            </ul>
+                        </details>
+                    </footer>
+                </article>
 
-<a href="/">Voltar</a>
+                <dialog id="modal-artista-{{id}}">
+                    <article>
+                        <header>
+                            <button aria-label="Fechar" rel="prev" onclick="fecharModal('modal-artista-{{id}}')"></button>
+                            <p><strong>{{nome}}</strong></p>
+                        </header>
+                        <p>Personagem: {{personagem}}</p>
+                        {{#if filme}}
+                            <p>Filme: {{filme.titulo}}</p>
+                        {{/if}}
+                        <footer>
+                            <button class="secondary" onclick="fecharModal('modal-artista-{{id}}')">Fechar</button>
+                            <a href="/artistas/{{id}}" role="button">Ver detalhes</a>
+                        </footer>
+                    </article>
+                </dialog>
+            {{else}}
+                <p class="vazio">Nenhum artista cadastrado.</p>
+            {{/each}}
+        </div>
+
+        <a href="/" data-tooltip="Voltar para a home">Voltar</a>
+    </main>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).showModal(); }
+        function fecharModal(id) { document.getElementById(id).close(); }
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'DIALOG') e.target.close();
+        });
+    </script>
+</body>
+</html>

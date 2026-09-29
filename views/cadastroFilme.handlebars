@@ -1,20 +1,61 @@
-<h1>Cadastrar Filme</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastrar Filme</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<form action="/filmes/cadastrar" method="POST">
-    <label>Título:</label>
-    <input type="text" name="titulo">
+    <main class="container">
+        <h1>Cadastrar Filme</h1>
 
-    <label>Ano:</label>
-    <input type="number" name="ano">
+        <article>
+            <form action="/filmes/cadastrar" method="POST">
+                <label>Título:
+                    <input type="text" name="titulo">
+                </label>
 
-    <label>Diretor:</label>
-    <select name="diretorId">
-        {{#each diretores}}
-            <option value="{{id}}">{{nome}}</option>
-        {{/each}}
-    </select>
+                <label>Ano:
+                    <input type="number" name="ano">
+                </label>
 
-    <button type="submit">Cadastrar</button>
-</form>
+                <label>Diretor:
+                    <select name="diretorId">
+                        {{#each diretores}}
+                            <option value="{{id}}">{{nome}}</option>
+                        {{/each}}
+                    </select>
+                </label>
 
-<a href="/filmes">Voltar</a>
+                <button type="submit" data-tooltip="Salvar o filme">Cadastrar</button>
+            </form>
+        </article>
+
+        <a href="/filmes" data-tooltip="Voltar para a lista de filmes">Voltar</a>
+    </main>
+</body>
+</html>

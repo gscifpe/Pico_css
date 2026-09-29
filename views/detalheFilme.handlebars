@@ -1,28 +1,67 @@
-<h1>Detalhes do Filme</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Filme</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<h2>{{filme.titulo}}</h2>
+    <main class="container">
+        <h1>Detalhes do Filme</h1>
 
-<p>Ano: {{filme.ano}}</p>
+        <article>
+            <header><h2>{{filme.titulo}}</h2></header>
 
-{{#if filme.diretor}}
-<p>Diretor: {{filme.diretor.nome}}</p>
-{{/if}}
+            <p>Ano: {{filme.ano}}</p>
 
-<h3>Artistas</h3>
-<ul>
-    {{#each filme.artistas}}
-        <li>{{nome}} - {{personagem}}</li>
-    {{/each}}
-</ul>
+            {{#if filme.diretor}}
+                <p>Diretor: {{filme.diretor.nome}}</p>
+            {{/if}}
 
-<h3>Ficha Técnica</h3>
+            <h3>Artistas</h3>
+            <ul>
+                {{#each filme.artistas}}
+                    <li>{{nome}} - {{personagem}}</li>
+                {{/each}}
+            </ul>
 
-{{#if filme.fichaTecnica}}
-<p>Duração: {{filme.fichaTecnica.duracao}} minutos</p>
-<p>Gênero: {{filme.fichaTecnica.genero}}</p>
-<p>Classificação: {{filme.fichaTecnica.classificacao}}</p>
-{{else}}
-<p>Este filme ainda não possui ficha técnica.</p>
-{{/if}}
+            <h3>Ficha Técnica</h3>
+            {{#if filme.fichaTecnica}}
+                <p>Duração: {{filme.fichaTecnica.duracao}} minutos</p>
+                <p>Gênero: {{filme.fichaTecnica.genero}}</p>
+                <p>Classificação: {{filme.fichaTecnica.classificacao}}</p>
+            {{else}}
+                <p>Este filme ainda não possui ficha técnica.</p>
+            {{/if}}
 
-<a href="/filmes">Voltar</a>
+            <footer>
+                <a href="/filmes" role="button" class="secondary" data-tooltip="Voltar para a lista de filmes">Voltar</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>

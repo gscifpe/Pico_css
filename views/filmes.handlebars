@@ -1,17 +1,90 @@
-<h1>Filmes</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Filmes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<a href="/filmes/cadastrar">Cadastrar Filme</a>
+    <main class="container">
+        <div class="topo-lista">
+            <h1>Filmes</h1>
+            <a href="/filmes/cadastrar" role="button" data-tooltip="Adicionar um novo filme" data-placement="left">Cadastrar Filme</a>
+        </div>
 
-<ul>
-    {{#each filmes}}
-        <li>
-            {{titulo}} - {{ano}}
-            {{#if diretor}}
-                - Diretor: {{diretor.nome}}
-            {{/if}}
-            <a href="/filmes/{{id}}">Detalhar</a>
-        </li>
-    {{/each}}
-</ul>
+        <div class="cards">
+            {{#each filmes}}
+                <article>
+                    <header><strong>{{titulo}}</strong></header>
+                    <p>Ano: {{ano}}</p>
+                    {{#if diretor}}
+                        <p>Diretor: {{diretor.nome}}</p>
+                    {{/if}}
+                    <footer>
+                        <details class="dropdown">
+                            <summary role="button" class="outline">Ações</summary>
+                            <ul>
+                                <li><a href="/filmes/{{id}}">Detalhar</a></li>
+                                <li><a href="#" onclick="abrirModal('modal-filme-{{id}}'); return false;">Visualização rápida</a></li>
+                            </ul>
+                        </details>
+                    </footer>
+                </article>
 
-<a href="/">Voltar</a>
+                <dialog id="modal-filme-{{id}}">
+                    <article>
+                        <header>
+                            <button aria-label="Fechar" rel="prev" onclick="fecharModal('modal-filme-{{id}}')"></button>
+                            <p><strong>{{titulo}}</strong></p>
+                        </header>
+                        <p>Ano: {{ano}}</p>
+                        {{#if diretor}}
+                            <p>Diretor: {{diretor.nome}}</p>
+                        {{/if}}
+                        <footer>
+                            <button class="secondary" onclick="fecharModal('modal-filme-{{id}}')">Fechar</button>
+                            <a href="/filmes/{{id}}" role="button">Ver detalhes</a>
+                        </footer>
+                    </article>
+                </dialog>
+            {{else}}
+                <p class="vazio">Nenhum filme cadastrado.</p>
+            {{/each}}
+        </div>
+
+        <a href="/" data-tooltip="Voltar para a home">Voltar</a>
+    </main>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).showModal(); }
+        function fecharModal(id) { document.getElementById(id).close(); }
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'DIALOG') e.target.close();
+        });
+    </script>
+</body>
+</html>

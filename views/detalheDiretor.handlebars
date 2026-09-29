@@ -1,13 +1,52 @@
-<h1>Detalhes do Diretor</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Diretor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<h2>{{diretor.nome}}</h2>
+    <main class="container">
+        <h1>Detalhes do Diretor</h1>
 
-<h3>Filmes</h3>
+        <article>
+            <header><h2>{{diretor.nome}}</h2></header>
 
-<ul>
-    {{#each diretor.filmes}}
-        <li>{{titulo}} - {{ano}}</li>
-    {{/each}}
-</ul>
+            <h3>Filmes</h3>
+            <ul>
+                {{#each diretor.filmes}}
+                    <li>{{titulo}} - {{ano}}</li>
+                {{/each}}
+            </ul>
 
-<a href="/diretores">Voltar</a>
+            <footer>
+                <a href="/diretores" role="button" class="secondary" data-tooltip="Voltar para a lista de diretores">Voltar</a>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>

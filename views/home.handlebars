@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catálogo de Filmes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section>
+            <hgroup>
+                <h1>Catálogo de Filmes</h1>
+                <p>Gerencie filmes, artistas, diretores e fichas técnicas em um só lugar.</p>
+            </hgroup>
+            <button onclick="abrirModal('modal-sobre')" class="outline" data-tooltip="Saiba mais sobre o sistema">Sobre o sistema</button>
+        </section>
+
+        <section class="cards">
+            <article>
+                <header><strong>Filmes</strong></header>
+                <p>Cadastre filmes com ano e diretor.</p>
+                <footer>
+                    <a href="/filmes" role="button" data-tooltip="Ver todos os filmes">Acessar</a>
+                </footer>
+            </article>
+
+            <article>
+                <header><strong>Artistas</strong></header>
+                <p>Atores, personagens e os filmes em que atuam.</p>
+                <footer>
+                    <a href="/artistas" role="button" data-tooltip="Ver todos os artistas">Acessar</a>
+                </footer>
+            </article>
+
+            <article>
+                <header><strong>Diretores</strong></header>
+                <p>Quem dirigiu cada filme do catálogo.</p>
+                <footer>
+                    <a href="/diretores" role="button" data-tooltip="Ver todos os diretores">Acessar</a>
+                </footer>
+            </article>
+
+            <article>
+                <header><strong>Fichas Técnicas</strong></header>
+                <p>Duração, gênero e classificação indicativa.</p>
+                <footer>
+                    <a href="/fichas" role="button" data-tooltip="Ver todas as fichas técnicas">Acessar</a>
+                </footer>
+            </article>
+        </section>
+
+        <dialog id="modal-sobre">
+            <article>
+                <header>
+                    <button aria-label="Fechar" rel="prev" onclick="fecharModal('modal-sobre')"></button>
+                    <p><strong>Sobre o sistema</strong></p>
+                </header>
+                <p>
+                    Este sistema organiza um catálogo de filmes. Cada filme possui um diretor,
+                    vários artistas e uma ficha técnica.
+                </p>
+                <footer>
+                    <button onclick="fecharModal('modal-sobre')">Entendi</button>
+                </footer>
+            </article>
+        </dialog>
+    </main>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).showModal(); }
+        function fecharModal(id) { document.getElementById(id).close(); }
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'DIALOG') e.target.close();
+        });
+    </script>
+</body>
+</html>

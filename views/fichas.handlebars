@@ -1,17 +1,92 @@
-<h1>Fichas Técnicas</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fichas Técnicas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<a href="/fichas/cadastrar">Cadastrar Ficha Técnica</a>
+    <main class="container">
+        <div class="topo-lista">
+            <h1>Fichas Técnicas</h1>
+            <a href="/fichas/cadastrar" role="button" data-tooltip="Adicionar uma nova ficha técnica" data-placement="left">Cadastrar Ficha Técnica</a>
+        </div>
 
-<ul>
-    {{#each fichas}}
-        <li>
-            {{genero}} - {{duracao}} minutos
-            {{#if filme}}
-                - Filme: {{filme.titulo}}
-            {{/if}}
-            <a href="/fichas/{{id}}">Detalhar</a>
-        </li>
-    {{/each}}
-</ul>
+        <div class="cards">
+            {{#each fichas}}
+                <article>
+                    <header><strong>{{genero}}</strong></header>
+                    <p>Duração: {{duracao}} minutos</p>
+                    {{#if filme}}
+                        <p>Filme: {{filme.titulo}}</p>
+                    {{/if}}
+                    <footer>
+                        <details class="dropdown">
+                            <summary role="button" class="outline">Ações</summary>
+                            <ul>
+                                <li><a href="/fichas/{{id}}">Detalhar</a></li>
+                                <li><a href="#" onclick="abrirModal('modal-ficha-{{id}}'); return false;">Visualização rápida</a></li>
+                            </ul>
+                        </details>
+                    </footer>
+                </article>
 
-<a href="/">Voltar</a>
+                <dialog id="modal-ficha-{{id}}">
+                    <article>
+                        <header>
+                            <button aria-label="Fechar" rel="prev" onclick="fecharModal('modal-ficha-{{id}}')"></button>
+                            <p><strong>Ficha Técnica</strong></p>
+                        </header>
+                        <p>Gênero: {{genero}}</p>
+                        <p>Duração: {{duracao}} minutos</p>
+                        <p>Classificação: {{classificacao}}</p>
+                        {{#if filme}}
+                            <p>Filme: {{filme.titulo}}</p>
+                        {{/if}}
+                        <footer>
+                            <button class="secondary" onclick="fecharModal('modal-ficha-{{id}}')">Fechar</button>
+                            <a href="/fichas/{{id}}" role="button">Ver detalhes</a>
+                        </footer>
+                    </article>
+                </dialog>
+            {{else}}
+                <p class="vazio">Nenhuma ficha técnica cadastrada.</p>
+            {{/each}}
+        </div>
+
+        <a href="/" data-tooltip="Voltar para a home">Voltar</a>
+    </main>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).showModal(); }
+        function fecharModal(id) { document.getElementById(id).close(); }
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'DIALOG') e.target.close();
+        });
+    </script>
+</body>
+</html>

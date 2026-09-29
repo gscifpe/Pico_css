@@ -1,14 +1,83 @@
-<h1>Diretores</h1>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diretores</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="/" class="contrast"><strong>Catálogo de Filmes</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/" data-tooltip="Página inicial" data-placement="bottom">Home</a></li>
+                <li>
+                    <details class="dropdown">
+                        <summary>Cadastros</summary>
+                        <ul dir="rtl">
+                            <li><a href="/filmes">Filmes</a></li>
+                            <li><a href="/artistas">Artistas</a></li>
+                            <li><a href="/diretores">Diretores</a></li>
+                            <li><a href="/fichas">Fichas Técnicas</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<a href="/diretores/cadastrar">Cadastrar Diretor</a>
+    <main class="container">
+        <div class="topo-lista">
+            <h1>Diretores</h1>
+            <a href="/diretores/cadastrar" role="button" data-tooltip="Adicionar um novo diretor" data-placement="left">Cadastrar Diretor</a>
+        </div>
 
-<ul>
-    {{#each diretores}}
-        <li>
-            {{nome}}
-            <a href="/diretores/{{id}}">Detalhar</a>
-        </li>
-    {{/each}}
-</ul>
+        <div class="cards">
+            {{#each diretores}}
+                <article>
+                    <header><strong>{{nome}}</strong></header>
+                    <footer>
+                        <details class="dropdown">
+                            <summary role="button" class="outline">Ações</summary>
+                            <ul>
+                                <li><a href="/diretores/{{id}}">Detalhar</a></li>
+                                <li><a href="#" onclick="abrirModal('modal-diretor-{{id}}'); return false;">Visualização rápida</a></li>
+                            </ul>
+                        </details>
+                    </footer>
+                </article>
 
-<a href="/">Voltar</a>
+                <dialog id="modal-diretor-{{id}}">
+                    <article>
+                        <header>
+                            <button aria-label="Fechar" rel="prev" onclick="fecharModal('modal-diretor-{{id}}')"></button>
+                            <p><strong>{{nome}}</strong></p>
+                        </header>
+                        <p>Consulte os filmes deste diretor na página de detalhes.</p>
+                        <footer>
+                            <button class="secondary" onclick="fecharModal('modal-diretor-{{id}}')">Fechar</button>
+                            <a href="/diretores/{{id}}" role="button">Ver detalhes</a>
+                        </footer>
+                    </article>
+                </dialog>
+            {{else}}
+                <p class="vazio">Nenhum diretor cadastrado.</p>
+            {{/each}}
+        </div>
+
+        <a href="/" data-tooltip="Voltar para a home">Voltar</a>
+    </main>
+
+    <script>
+        function abrirModal(id) { document.getElementById(id).showModal(); }
+        function fecharModal(id) { document.getElementById(id).close(); }
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'DIALOG') e.target.close();
+        });
+    </script>
+</body>
+</html>
