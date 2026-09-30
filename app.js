@@ -1,5 +1,6 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
+const  sequelize = require('./config/bd')
 
 
 const { Filme, Diretor, Artista, FichaTecnica } = require('./models');
@@ -157,6 +158,19 @@ app.get('/fichas/:id', async (req, res) => {
     res.render('detalheFicha', { ficha: ficha.get({ plain: true }) });
 });
 
+async function inicializarBanco() {
+  try {
+    
+    await sequelize.sync({ alter: true });
+    console.log('Banco de dados SQLite sincronizado com sucesso.');
+    
+    
+  } catch (error) {
+    console.error('Erro ao sincronizar o banco de dados:', error);
+  }
+}
+
+inicializarBanco();
 
 app.listen(3000, () => {
     console.log('Servidor rodando em http://localhost:3000');
